@@ -5,6 +5,8 @@ local dots = {}
 math.randomseed(os.time())
 
 local function create_dots(width, height)
+    if width == nil or height == nil or width <= 80 or height <= 80 then return end
+
     for i = 1, 40 do
         table.insert(dots, {
             x = math.random(40, width - 40),
@@ -21,19 +23,23 @@ end
 function conky_draw_dots()
     if conky_window == nil then return end
 
+    local width = conky_window.width or 0
+    local height = conky_window.height or 0
+    if width <= 0 or height <= 0 then return end
+
     local surface = cairo_xlib_surface_create(
         conky_window.display,
         conky_window.drawable,
         conky_window.visual,
-        conky_window.width,
-        conky_window.height
+        width,
+        height
     )
     local cs = cairo_create(surface)
     local padding = 25
 
     -- Initialise from the real window dimensions so the whole enlarged area is used.
     if #dots == 0 then
-        create_dots(conky_window.width, conky_window.height)
+        create_dots(width, height)
     end
 
     -- Clear window canvas with full transparency
@@ -47,14 +53,17 @@ function conky_draw_dots()
         d.y = d.y + (d.speed_y * d.dir_y)
 
         -- Bounce off horizontal boundaries
-        if d.x <= padding or d.x >= conky_window.width - padding then
+        if d.x <= padding or d.x >= width - padding then
             d.dir_x = d.dir_x * -1
         end
 
         -- Bounce off vertical boundaries
-        if d.y <= padding or d.y >= conky_window.height - padding then
+        if d.y <= padding or d.y >= height - padding then
             d.dir_y = d.dir_y * -1
         end
+
+        d.x = math.max(padding, math.min(width - padding, d.x))
+        d.y = math.max(padding, math.min(height - padding, d.y))
 
         -- Render semi-transparent glowing white dot
         cairo_arc(cs, d.x, d.y, d.radius, 0, 2 * math.pi)
