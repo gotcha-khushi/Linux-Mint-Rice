@@ -1,0 +1,15 @@
+(defwidget workspace_switcher []
+  (box :class "switcher-box" :orientation "h" :space-evenly false :spacing 8
+    (button :class "num-btn" :onclick "/home/koshi/.config/widgets/eww/switch_profile.sh 1" "①")
+    (button :class "num-btn" :onclick "/home/koshi/.config/widgets/eww/switch_profile.sh 2" "②")
+    (button :class "num-btn" :onclick "/home/koshi/.config/widgets/eww/switch_profile.sh 3" "③")
+    (button :class "num-btn" :onclick "/home/koshi/.config/widgets/eww/switch_profile.sh 4" "④")))
+
+(defwindow switcher_bar
+  :monitor 0
+  :geometry (geometry :x "60px" :y "20px" :width "120px" :height "30px" :anchor "top left")
+  :stacking "bg"
+  :focusable false
+  :windowtype "desktop"
+  :wm-ignore false
+  (workspace_switcher))

@@ -1,0 +1,14 @@
+(defpoll weather_data :interval "10m" "python3 /home/koshi/.config/widgets/eww/weather_fetch.py")
+
+(defwindow weather_marquee
+  :monitor 0
+  :geometry (geometry :x "250px" :y "1px" :width "1800px" :height "30px" :anchor "top left")
+  :stacking "bg"
+  :windowtype "dock"
+  :wm-ignore false
+
+  (eventbox :onclick "python3 /home/koshi/.config/widgets/eww/weather_fetch.py --toggle"
+    (box :class "marquee-container" :halign "start" :valign "center"
+      (label :class "marquee-text" :text weather_data))))
+
+

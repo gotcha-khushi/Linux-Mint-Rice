@@ -33,7 +33,7 @@ function conky_draw_clock()
 
     -- Draw Large Time (HH:MM)
     cairo_set_font_size(cs, 190)
-    cairo_set_source_rgba(cs, 1.0, 1.0, 1.0, 0.40) -- Soft translucent white
+    cairo_set_source_rgba(cs, 1.0, 1.0, 1.0, 0.25) -- Soft translucent white
     -- Position the text 15 px from the window's right edge.
     draw_right(cs, hours_mins, 215, 15)
 

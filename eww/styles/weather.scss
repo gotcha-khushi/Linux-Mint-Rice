@@ -1,0 +1,18 @@
+* {
+  all: unset;
+}
+
+window {
+  background-color: transparent;
+}
+
+.marquee-container {
+  background-color: transparent;
+}
+
+.marquee-text {
+  color: rgba(255, 255, 255, 0.637);
+  font-family: "Bitcount Grid Single Roman", monospace;
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}

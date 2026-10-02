@@ -1,10 +1,2 @@
-(defpoll weather_data :interval "15m" "python3 /home/koshi/.config/widgets/eww/weather_fetch.py")
-
-(defwindow weather_marquee
-  :monitor 0
-  :geometry (geometry :x "450px" :y "1px" :width "1800px" :height "30px" :anchor "top left")
-  :stacking "bg"
-  :windowtype "dock"
-  :wm-ignore false
-  (box :class "marquee-container" :halign "start" :valign "center"
-    (label :class "marquee-text" :text weather_data)))
+(include "./switcher.yuck")
+(include "./weather.yuck")
